@@ -1,0 +1,19 @@
+type ComponentBought @entity(immutable: true) {
+  id: Bytes!
+  buyer: Bytes! # address
+  component_id: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ComponentCreated @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  code_hash: String! # string
+  price: BigInt! # uint256
+  id: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
