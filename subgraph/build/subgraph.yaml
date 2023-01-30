@@ -1,0 +1,26 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: FlexBuild
+    network: mumbai
+    source:
+      address: "0xdb1CA5A8A8d1A7542Fd5A1824B223B0c966b7Afb"
+      abi: FlexBuild
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ComponentBought
+        - ComponentCreated
+      abis:
+        - name: FlexBuild
+          file: FlexBuild/abis/FlexBuild.json
+      eventHandlers:
+        - event: ComponentBought(address,uint256)
+          handler: handleComponentBought
+        - event: ComponentCreated(address,string,uint256,uint256)
+          handler: handleComponentCreated
+      file: FlexBuild/FlexBuild.wasm
