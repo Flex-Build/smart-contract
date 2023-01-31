@@ -6,9 +6,9 @@ import { Component, User } from "../generated/schema"
 
 export function handleComponentBought(event: ComponentBoughtEvent): void {
   let buyer = event.params.buyer
-  const user = User.load(buyer.toString())
+  const user = User.load(buyer.toHexString())
   if (!user) {
-    const user = new User(buyer.toString())
+    const user = new User(buyer.toHexString())
     user.bought_components = [event.params.component_id.toString()]
     user.save();
   } else {
@@ -20,9 +20,9 @@ export function handleComponentBought(event: ComponentBoughtEvent): void {
 
 export function handleComponentCreated(event: ComponentCreatedEvent): void {
   let owner = event.params.owner
-  const user = User.load(owner.toString())
+  const user = User.load(owner.toHexString())
   if (!user) {
-    const user = new User(owner.toString())
+    const user = new User(owner.toHexString())
     user.bought_components = []
     user.save();
   }
@@ -31,5 +31,6 @@ export function handleComponentCreated(event: ComponentCreatedEvent): void {
   )
   component.code_hash = event.params.code_hash;
   component.price = event.params.price
+  component.owner = event.params.owner
   component.save()
 }
