@@ -1,2 +1,3 @@
 # Smart contract address
-```0xdb1CA5A8A8d1A7542Fd5A1824B223B0c966b7Afb```
+
+```0x2E88e98fcd358f7E579B7f676ED173c509be7470```

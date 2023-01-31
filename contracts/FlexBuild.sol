@@ -43,6 +43,9 @@ contract FlexBuild {
         for (uint256 i = 0; i < ids.length; i++) {
             id_to_order[order_id_counter].buyer = msg.sender;
             id_to_order[order_id_counter].component_id = ids[i];
+            payable(id_to_component[ids[i]].owner).transfer(
+                id_to_component[ids[i]].price
+            );
             emit ComponentBought(msg.sender, ids[i]);
             order_id_counter++;
         }
