@@ -29,7 +29,7 @@ export function handleComponentCreated(event: ComponentCreatedEvent): void {
   let component = new Component(
     event.params.id.toString()
   )
-  component.code_hash = event.params.code_hash;
+  component.code_uri = "ipfs://" + event.params.code_hash;
   component.price = event.params.price
   component.owner = event.params.owner
   component.save()

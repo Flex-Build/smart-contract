@@ -6,6 +6,6 @@ type User @entity {
 type Component @entity {
   id: String!
   owner: Bytes! # address
-  code_hash: String! # string
+  code_uri: String! # string
   price: BigInt! # uint256
 }

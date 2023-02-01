@@ -92,13 +92,13 @@ export class Component extends Entity {
     this.set("owner", Value.fromBytes(value));
   }
 
-  get code_hash(): string {
-    let value = this.get("code_hash");
+  get code_uri(): string {
+    let value = this.get("code_uri");
     return value!.toString();
   }
 
-  set code_hash(value: string) {
-    this.set("code_hash", Value.fromString(value));
+  set code_uri(value: string) {
+    this.set("code_uri", Value.fromString(value));
   }
 
   get price(): BigInt {
