@@ -4,4 +4,4 @@
 
 # FlexBuild deployed to
 
-`0xF8D9c7af0064E631bF64a3e14bb32e44e9430f74`
+`0xbE60312e8C1Eee01AC4668A120acac6F97Eee953`
