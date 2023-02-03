@@ -8,15 +8,11 @@ contract FlexBuild {
         address owner;
         string code_hash;
         uint256 price;
+        string name;
     }
 
     event ComponentBought(address buyer, uint256 component_id);
-    event ComponentCreated(
-        address owner,
-        string code_hash,
-        uint256 price,
-        uint256 id
-    );
+    event ComponentCreated(address owner, string code_hash, uint256 price, uint256 id, string name);
     struct Order {
         address buyer;
         uint256 component_id;
@@ -26,11 +22,12 @@ contract FlexBuild {
     uint256 id_counter = 0;
     mapping(uint256 => Component) public id_to_component;
 
-    function createComponent(string memory code_hash, uint256 price) public {
+    function createComponent(string memory code_hash, uint256 price, string memory name) public {
         id_to_component[id_counter].owner = msg.sender;
         id_to_component[id_counter].code_hash = code_hash;
         id_to_component[id_counter].price = price;
-        emit ComponentCreated(msg.sender, code_hash, price, id_counter);
+        id_to_component[id_counter].name = name;
+        emit ComponentCreated(msg.sender, code_hash, price, id_counter, name);
         id_counter++;
     }
 
@@ -43,11 +40,17 @@ contract FlexBuild {
         for (uint256 i = 0; i < ids.length; i++) {
             id_to_order[order_id_counter].buyer = msg.sender;
             id_to_order[order_id_counter].component_id = ids[i];
-            payable(id_to_component[ids[i]].owner).transfer(
-                id_to_component[ids[i]].price
-            );
+            payable(id_to_component[ids[i]].owner).transfer(id_to_component[ids[i]].price);
             emit ComponentBought(msg.sender, ids[i]);
             order_id_counter++;
         }
+    }
+
+    function getComponents() public view returns (Component[] memory) {
+        Component[] memory ret = new Component[](id_counter);
+        for (uint i = 0; i < id_counter; i++) {
+            ret[i] = id_to_component[i];
+        }
+        return ret;
     }
 }
